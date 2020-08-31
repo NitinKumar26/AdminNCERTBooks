@@ -1,0 +1,25 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    <item android:id="@+id/action_updates"
+        android:title="Updates"
+        android:icon="@drawable/updates_icon" />
+        -->
+
+    <item android:id="@+id/action_home"
+        android:title="@string/home"
+        android:icon="@drawable/home_icon" />
+
+    <!--
+    <item
+        android:id="@+id/action_test_series"
+        android:title="Test Series"
+        android:icon="@drawable/test_series_icon" /> -->
+
+    <item
+        android:id="@+id/action_result"
+        android:title="@string/result"
+        android:icon="@drawable/result_icon" />
+
+</menu>

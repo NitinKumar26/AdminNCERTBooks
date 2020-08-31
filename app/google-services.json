@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "248846442287",
+    "firebase_url": "https://ncertbooks-e7f98.firebaseio.com",
+    "project_id": "ncertbooks-e7f98",
+    "storage_bucket": "ncertbooks-e7f98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248846442287:android:046c6af625f37cf0860bda",
+        "android_client_info": {
+          "package_name": "com.gadgetsfolk.admin.ncertbooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248846442287-rkl3f3dnrbtmmbt6l4auq63s23qkblgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gadgetsfolk.admin.ncertbooks",
+            "certificate_hash": "540f5489604e56e6489fe619e343a84ed01ea9d4"
+          }
+        },
+        {
+          "client_id": "248846442287-niv5ehme9u2uj8k4089urakirsv6o8hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gadgetsfolk.admin.ncertbooks",
+            "certificate_hash": "ea2ca2bc2afbe1ef29eadc3904bb55c2dae49a60"
+          }
+        },
+        {
+          "client_id": "248846442287-kvvvvj10irf5bin1h1pcrc53omjsnin3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhOO7w_-6BMc0e5Jt7bPGJVz_-fWsqZNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248846442287-kvvvvj10irf5bin1h1pcrc53omjsnin3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248846442287:android:4c1b5e26d9483b4d860bda",
+        "android_client_info": {
+          "package_name": "com.gadgetsfolk.ncertbooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248846442287-530t0t0bat1h5k80pg7011cfjj8h9n14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gadgetsfolk.ncertbooks",
+            "certificate_hash": "ea2ca2bc2afbe1ef29eadc3904bb55c2dae49a60"
+          }
+        },
+        {
+          "client_id": "248846442287-kvvvvj10irf5bin1h1pcrc53omjsnin3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhOO7w_-6BMc0e5Jt7bPGJVz_-fWsqZNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248846442287-kvvvvj10irf5bin1h1pcrc53omjsnin3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
