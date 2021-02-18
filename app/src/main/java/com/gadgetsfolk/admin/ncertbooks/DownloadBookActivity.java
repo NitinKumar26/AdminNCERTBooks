@@ -102,7 +102,5 @@ public class DownloadBookActivity extends AppCompatActivity {
                     Log.e("status","error");
                 }
             });
-        }
-    }
-
+        } }
 }

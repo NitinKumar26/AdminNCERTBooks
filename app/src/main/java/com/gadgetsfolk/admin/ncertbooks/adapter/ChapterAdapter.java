@@ -38,6 +38,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
         holder.tvSerial.setText(String.valueOf(serial));
         holder.tvChapterName.setText(item.getChapter_name());
+        holder.tvPdfUrl.setText(item.getChapter_pdf_url());
 
         if (position % 5 == 0) holder.rlImg.setBackground(mContext.getResources().getDrawable(R.drawable.gradient_two));
         else if (position % 5 == 1) holder.rlImg.setBackground(mContext.getResources().getDrawable(R.drawable.gradient_three));
@@ -55,12 +56,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         private RelativeLayout rlImg;
         private TextView tvSerial;
         private TextView tvChapterName;
+        private TextView tvPdfUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rlImg = itemView.findViewById(R.id.img);
             tvSerial = itemView.findViewById(R.id.tv_serial);
             tvChapterName = itemView.findViewById(R.id.tv_title);
+            tvPdfUrl = itemView.findViewById(R.id.tv_pdf_url);
         }
     }
 

@@ -2,6 +2,7 @@ package com.gadgetsfolk.admin.ncertbooks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -33,7 +34,7 @@ public class ClassActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private SubjectAdapter subjectAdapter;
     private ArrayList<Subject> subjects;
-    private FirebaseFirestore db;
+    //private FirebaseFirestore db;
     private String lang;
     private String type;
     private String className;
@@ -43,13 +44,13 @@ public class ClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class);
         ButterKnife.bind(this);
-        db = FirebaseFirestore.getInstance();
+        //db = FirebaseFirestore.getInstance();
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         className = getIntent().getStringExtra("class");
-        lang = getIntent().getStringExtra("lang") + "_books";
-        type = getIntent().getStringExtra("type") + "_ncert";
+        lang = getIntent().getStringExtra("lang") + "_books" ;
+        type = getIntent().getStringExtra("type");
         //Log.e("claas", className);
         //Log.e("lang", lang);
         //Log.e("type", type);
@@ -58,12 +59,7 @@ public class ClassActivity extends AppCompatActivity {
             actionBar.setTitle(getString(R.string.class_name, className));
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         subjects = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -73,22 +69,23 @@ public class ClassActivity extends AppCompatActivity {
 
         getSubjects();
 
-        recyclerView.addOnItemTouchListener(new HelperMethods.RecyclerTouchListener(this, new HelperMethods.ClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent = new Intent(ClassActivity.this, SubjectActivity.class);
-                intent.putExtra("class", className);
-                intent.putExtra("lang", lang);
-                intent.putExtra("type", type);
-                intent.putExtra("doc_id", subjects.get(position).getId());
-                intent.putExtra("subject_name", subjects.get(position).getSubject());
-                startActivity(intent);
-            }
+        recyclerView.addOnItemTouchListener(new HelperMethods.RecyclerTouchListener(this, position -> {
+            Intent intent = new Intent(ClassActivity.this, SubjectActivity.class);
+            intent.putExtra("class", className);
+            intent.putExtra("lang", lang);
+            intent.putExtra("type", type);
+            intent.putExtra("doc_id", subjects.get(position).getId());
+            intent.putExtra("subject_name", subjects.get(position).getSubject());
+            startActivity(intent);
         }));
+
+        Log.e("lang", lang);
+        Log.e("type", type);
+        Log.e("className", className);
     }
 
     private void getSubjects(){
-        db.collection(lang).document(type)
+        FirebaseFirestore.getInstance().collection(lang).document(type)
                 .collection("classes")
                 .document(className)
                 .collection("subjects").get()

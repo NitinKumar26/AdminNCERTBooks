@@ -41,7 +41,6 @@ public class EnglishFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         type = getActivity().getIntent().getStringExtra("type");
 
-
         mBooksList = new ArrayList<>();
         mBooksList.add(new Book("XII"));
         mBooksList.add(new Book("XI"));

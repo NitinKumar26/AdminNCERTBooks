@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                     break;
                 case 1:
                     intent = new Intent(getContext(), NCERTSolutionActivity.class);
-                    intent.putExtra("type", "solution");
+                    intent.putExtra("type", "ncert_solutions");
                     startActivity(intent);
                     break;
                 case 2:
