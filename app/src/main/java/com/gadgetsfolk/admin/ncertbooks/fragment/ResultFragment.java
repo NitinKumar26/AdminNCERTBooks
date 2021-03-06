@@ -21,7 +21,6 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
         ButterKnife.bind(this, view);
         return view;
-        //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

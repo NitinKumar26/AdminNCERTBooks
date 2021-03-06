@@ -38,6 +38,8 @@
         <activity android:name=".DownloadBookActivity" android:parentActivityName=".SubjectActivity" />
 
         <activity android:name=".PDFActivity" android:parentActivityName=".SubjectActivity"/>
+
+        <activity android:name=".UpdateDocs" android:parentActivityName=".SubjectActivity" />
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.gadgetsfolk.admin.ncertbooks.fragment.ncertbooks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,21 +40,23 @@ public class EnglishFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        type = getActivity().getIntent().getStringExtra("type");
+        if (getActivity() != null) type = getActivity().getIntent().getStringExtra(getString(R.string.type));
+
+        Log.e("type", type);
 
         mBooksList = new ArrayList<>();
-        mBooksList.add(new Book("XII"));
-        mBooksList.add(new Book("XI"));
-        mBooksList.add(new Book("X"));
-        mBooksList.add(new Book("IX"));
-        mBooksList.add(new Book("VIII"));
-        mBooksList.add(new Book("VII"));
-        mBooksList.add(new Book("VI"));
-        mBooksList.add(new Book("V"));
-        mBooksList.add(new Book("IV"));
-        mBooksList.add(new Book("III"));
-        mBooksList.add(new Book("II"));
-        mBooksList.add(new Book("I"));
+        mBooksList.add(new Book(getString(R.string.xii)));
+        mBooksList.add(new Book(getString(R.string.xi)));
+        mBooksList.add(new Book(getString(R.string.x)));
+        mBooksList.add(new Book(getString(R.string.ix)));
+        mBooksList.add(new Book(getString(R.string.viii)));
+        mBooksList.add(new Book(getString(R.string.vii)));
+        mBooksList.add(new Book(getString(R.string.vi)));
+        mBooksList.add(new Book(getString(R.string.v)));
+        mBooksList.add(new Book(getString(R.string.iv)));
+        mBooksList.add(new Book(getString(R.string.iii)));
+        mBooksList.add(new Book(getString(R.string.ii)));
+        mBooksList.add(new Book(getString(R.string.i)));
 
         BookAdapter adapter = new BookAdapter(mBooksList, getContext());
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3, RecyclerView.VERTICAL, false));

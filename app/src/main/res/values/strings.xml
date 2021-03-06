@@ -1,7 +1,93 @@
 <resources>
-    <string name="app_name">AdminNCERTBooks</string>
-    <string name="home">Home</string>
-    <string name="result">Result</string>
+
+    <string name="app_name">NCERT Books &amp; Solutions</string>
     <string name="class_name">Class %1$s</string>
     <string name="download_book">Download Book</string>
+
+    <!-- AdMob credentials -->
+    <string name="admob_app_id">ca-app-pub-4214231949040116~6595355409</string>
+    <string name="interstitial_ad_unit">ca-app-pub-4214231949040116/7385144159</string>
+    <string name="banner_ad_id">ca-app-pub-4214231949040116/3969192060</string>
+    <string name="native_advanced">ca-app-pub-4214231949040116/2858935155</string>
+    <string name="app_open_ad_id">ca-app-pub-4214231949040116/4683324153</string>
+    <!-- Unity Keys -->
+    <string name="game_id">gameId</string>
+    <string name="zone_id">zoneId</string>
+    <string name="gdpr_consent">gdpr.consent</string>
+    <!-- Unity Credentials -->
+    <string name="unity_game_id">4031037</string>
+    <string name="unity_interstitial">unityInterstitial</string>
+    <string name="unity_banner">unityBanner</string>
+
+
+
+    <!-- Test IDs
+    <string name="native_ad_test_id">ca-app-pub-3940256099942544/2247696110</string>
+    -->
+
+    <string name="english_books">english_books</string>
+    <string name="ncert_exemplar_books">ncert_exemplar_books</string>
+    <string name="ncert_exemplar_solutions">ncert_exemplar_solutions</string>
+    <string name="ncert_notes">ncert_notes</string>
+    <string name="ncert_solutions">ncert_solutions</string>
+    <string name="new_ncert">new_ncert</string>
+
+
+    <string name="hindi_books">hindi_books</string>
+    <string name="urdu_books">urdu_books</string>
+
+    <string name="i">I</string>
+    <string name="ii">II</string>
+    <string name="iii">III</string>
+    <string name="iv">IV</string>
+    <string name="v">V</string>
+    <string name="vi">VI</string>
+    <string name="vii">VII</string>
+    <string name="viii">VIII</string>
+    <string name="ix">IX</string>
+    <string name="x">X</string>
+    <string name="xi">XI</string>
+    <string name="xii">XII</string>
+    <string name="type">type</string>
+    <string name="title">title</string>
+    <string name="collection_classes">classes</string>
+    <string name="collection_subjects">subjects</string>
+    <string name="collection_chapters">chapters</string>
+    <string name="collection_results">board_result</string>
+    <string name="english">English</string>
+    <string name="hindi">Hindi</string>
+    <string name="urdu">Urdu</string>
+    <string name="lang">lang</string>
+    <string name="subject_name">subject_name</string>
+    <string name="doc_id">doc_id</string>
+    <string name="pdf_path">pdf_path</string>
+    <string name="chapter_pdf_url">chapter_pdf_url</string>
+    <string name="pdf_name">pdf_name</string>
+
+    <string name="ncert_new_books">NCERT New Books</string>
+    <string name="ncert_solution">NCERT Solution</string>
+    <string name="title_ncert_notes">NCERT Notes</string>
+    <string name="title_ncert_exemplar_books">NCERT Exemplar Books</string>
+    <string name="title_ncert_exemplar_solution">NCERT Exemplar Solution</string>
+    <string name="user_class">class</string>
+    <string name="title_tenth_result">10th Result 2021</string>
+    <string name="title_twelfth_result">12th Result 2021</string>
+    <string name="tenth">tenth</string>
+    <string name="url">url</string>
+
+    <string name="ncert_books">NCERT Books</string>
+    <string name="and">And</string>
+    <string name="solutions">Solutions</string>
+
+    <string name="ad_attribution">Ad</string>
+    <string name="_10th_result">10th Result</string>
+    <string name="_2021">2021</string>
+    <string name="all_boards">All Boards</string>
+    <string name="_12th_result">12th Result</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="home">Home</string>
+    <string name="result">Result</string>
+
 </resources>

@@ -4,9 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gadgetsfolk.admin.ncertbooks.adapter.ChapterAdapter;
 import com.gadgetsfolk.admin.ncertbooks.helper.HelperMethods;
 import com.gadgetsfolk.admin.ncertbooks.model.Chapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.kotlinpermissions.KotlinPermissions;
 
 import java.io.File;
@@ -121,4 +128,31 @@ public class SubjectActivity extends AppCompatActivity {
                 }).addOnFailureListener(e -> {})
                 .addOnCompleteListener(task -> {});
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_update:
+                Intent intent = new Intent(this, UpdateDocs.class);
+                intent.putExtra("class", className);
+                intent.putExtra("lang", lang);
+                intent.putExtra("type", type);
+                intent.putExtra("doc_id", docId);
+                intent.putExtra("subject_name", subjectName);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

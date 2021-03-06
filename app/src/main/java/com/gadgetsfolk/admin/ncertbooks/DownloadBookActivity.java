@@ -26,6 +26,17 @@ public class DownloadBookActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+
+    String link = "https://firebasestorage.googleapis.com/v0/b/tyari-98a5a.appspot.com/o/NCERT%20Books%20%26%20Solutions%20Data%2Fenglish_books%2Fncert_solutions%2Fxii%2Fsociology%2F0vOIl8ZZwsO1acPa1GQi.pdf?alt=media&token=7d14d984-e25d-41cf-975b-9bfdbb09cda7";
+
+    String link2 = "https://firebasestorage.googleapis.com/v0/b/tyari-98a5a.appspot.com/o/NCERT%20Books%20%26%20Solutions%20Data%2Fenglish_books%2Fncert_solutions%2Fxii%2Fsociology%2FCDPzY0miu8MHVKR3Bn3y.pdf?alt=media&token=59b90cef-9e40-49eb-ab61-4499b46a8efd";
+
+    String link3 = "https://firebasestorage.googleapis.com/v0/b/tyari-98a5a.appspot.com/o/NCERT%20Books%20%26%20Solutions%20Data%2Fenglish_books%2Fncert_solutions%2Fxii%2Fsociology%2FGEpW8VLIOpIjOEdsqVmd.pdf?alt=media&token=595801f2-47ef-422d-b514-6df7d326b6b9";
+
+    int startIndex = 163;
+    int endIndex = 187;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +54,21 @@ public class DownloadBookActivity extends AppCompatActivity {
 
         pdf_url = getIntent().getStringExtra("chapter_pdf_url");
         title = getIntent().getStringExtra("title");
+
     }
 
     @OnClick(R.id.btn_download_book)
     void downloadBook(){
+        Log.e("linkLength", String.valueOf(link.length()));
+        Log.e("link2Length", String.valueOf(link2.length()));
+        Log.e("link3Length", String.valueOf(link3.length()));
+        String subString = link.substring(startIndex, endIndex);
+        String subString2 = link2.substring(startIndex, endIndex);
+        String subString3 = link3.substring(startIndex, endIndex);
+        Log.e("substring", subString);
+        Log.e("substring2", subString2);
+        Log.e("substring3", subString3);
+        /*
         File myDirectory = new File(Environment.getExternalStorageDirectory(), "GadNCERT");
         if (!myDirectory.exists()){
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/GadNCERT";
@@ -102,5 +124,8 @@ public class DownloadBookActivity extends AppCompatActivity {
                     Log.e("status","error");
                 }
             });
-        } }
+        }
+        */
+         }
+
 }

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +29,8 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerView_ncert_books)
     RecyclerView recyclerViewNCERTBooks;
-    //@BindView(R.id.recyclerView_books_solutions)
-    //RecyclerView recyclerViewBooksSolutions;
+
     private ArrayList<HomeItem> NCERTBooksList;
-    //private ArrayList<HomeItem> BooksSolutionsList;
 
     @Nullable
     @Override
@@ -66,23 +63,23 @@ public class HomeFragment extends Fragment {
             switch (position){
                 case 0:
                     intent = new Intent(getContext(), NCERTBooksActivity.class);
-                    intent.putExtra("title", NCERTBooksList.get(position).getTitle());
-                    intent.putExtra("type", "new");
+                    intent.putExtra(getString(R.string.title), NCERTBooksList.get(position).getTitle());
+                    intent.putExtra(getString(R.string.type), getString(R.string.new_ncert));
                     startActivity(intent);
                     break;
                 case 1:
                     intent = new Intent(getContext(), NCERTSolutionActivity.class);
-                    intent.putExtra("type", "ncert_solutions");
+                    intent.putExtra(getString(R.string.type), getString(R.string.ncert_solutions));
                     startActivity(intent);
                     break;
                 case 2:
                     intent = new Intent(getContext(), NCERTSolutionActivity.class);
-                    intent.putExtra("type", "notes");
+                    intent.putExtra(getString(R.string.type), getString(R.string.ncert_notes));
                     startActivity(intent);
                     break;
                 case 3:
                     intent = new Intent(getContext(), NCERTSolutionActivity.class);
-                    intent.putExtra("type", "exemplar_books");
+                    intent.putExtra(getString(R.string.type), getString(R.string.ncert_exemplar_books));
                     startActivity(intent);
                     break;
                 case 4:
@@ -92,27 +89,5 @@ public class HomeFragment extends Fragment {
 
             }
         }));
-
-        /*
-
-        BooksSolutionsList = new ArrayList<>();
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-        BooksSolutionsList.add(new HomeItem(R.drawable.home_icon, "Item"));
-
-        //HomeAdapter booksSolutionsAdapter = new HomeAdapter(getContext(), BooksSolutionsList);
-        //recyclerViewBooksSolutions.setLayoutManager(new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false));
-        //recyclerViewBooksSolutions.setAdapter(booksSolutionsAdapter);
-
-         */
     }
 }
