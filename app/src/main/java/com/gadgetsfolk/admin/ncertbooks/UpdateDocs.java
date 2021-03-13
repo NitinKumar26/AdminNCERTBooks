@@ -17,8 +17,8 @@ public class UpdateDocs extends AppCompatActivity {
     private String className;
     private String docId;
     private String subjectName;
-    int startIndex = 162;
-    int endIndex = 186;
+    int startIndex = 169;
+    int endIndex = 193;
     String pdfName;
     String url;
 
@@ -58,12 +58,8 @@ public class UpdateDocs extends AppCompatActivity {
                                         .collection("subjects")
                                         .document(docId)
                                         .collection("chapters").document(queryDocumentSnapshots.getDocuments().get(i).getId())
-                                        .update("pdf_name", pdfName).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                        .update("pdf_name", pdfName).addOnSuccessListener(unused ->
+                                        Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show());
                             }
                         }
                     }

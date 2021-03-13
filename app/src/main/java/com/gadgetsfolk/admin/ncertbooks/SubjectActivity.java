@@ -1,15 +1,13 @@
 package com.gadgetsfolk.admin.ncertbooks;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,14 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gadgetsfolk.admin.ncertbooks.adapter.ChapterAdapter;
-import com.gadgetsfolk.admin.ncertbooks.helper.HelperMethods;
 import com.gadgetsfolk.admin.ncertbooks.model.Chapter;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.kotlinpermissions.KotlinPermissions;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +37,6 @@ public class SubjectActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private ChapterAdapter chapterAdapter;
     private ArrayList<Chapter> chapters;
-    private FirebaseFirestore db;
     private String lang;
     private String type;
     private String className;
@@ -57,7 +49,6 @@ public class SubjectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_subject);
 
         ButterKnife.bind(this);
-        db = FirebaseFirestore.getInstance();
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -89,31 +80,10 @@ public class SubjectActivity extends AppCompatActivity {
         recyclerView.setAdapter(chapterAdapter);
 
         getChapters(docId);
-
-        recyclerView.addOnItemTouchListener(new HelperMethods.RecyclerTouchListener(this, position -> {
-            KotlinPermissions.with(this)
-                    .permissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .onAccepted(list -> {
-                        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/GadNCERT/" +
-                                chapters.get(position).getPdf_name();
-                        File file = new File(path);
-                        if (file.exists()){
-                            Intent intent = new Intent(SubjectActivity.this, PDFActivity.class);
-                            intent.putExtra("title", chapters.get(position).getChapter_name());
-                            intent.putExtra("pdf_path", path);
-                            startActivity(intent);
-                        }else {
-                            Intent intent = new Intent(SubjectActivity.this, DownloadBookActivity.class);
-                            intent.putExtra("title", chapters.get(position).getChapter_name());
-                            intent.putExtra("chapter_pdf_url", chapters.get(position).getChapter_pdf_url());
-                            startActivity(intent);
-                        }
-                    }).ask();
-        }));
     }
 
     private void getChapters(String docId){
-        db.collection(lang).document(type)
+        FirebaseFirestore.getInstance().collection(lang).document(type)
                 .collection("classes")
                 .document(className)
                 .collection("subjects")
@@ -125,6 +95,9 @@ public class SubjectActivity extends AppCompatActivity {
                     chapterAdapter.setItems(chapters);
                     chapterAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                    for (int i = 0; i < subjectsList.size(); i++){
+                        Log.e("urlsize--> index: ",  i  + " " + subjectsList.get(i).getChapter_pdf_url().length());
+                    }
                 }).addOnFailureListener(e -> {})
                 .addOnCompleteListener(task -> {});
     }
