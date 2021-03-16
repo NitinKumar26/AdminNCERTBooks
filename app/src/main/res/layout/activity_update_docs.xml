@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <Button
         android:id="@+id/btn_update_pdf_name"
@@ -12,9 +13,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
         android:text="Update pdf names"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerHorizontal="true"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/index_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Index Value"
+        android:layout_margin="12dp"
+        android:inputType="numberDecimal"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/isNegative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Negative Value"
+        android:layout_below="@id/index_value"
+        android:layout_marginStart="12dp"
+        />
+
+</RelativeLayout>
