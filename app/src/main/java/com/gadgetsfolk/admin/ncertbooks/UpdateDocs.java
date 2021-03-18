@@ -23,12 +23,12 @@ public class UpdateDocs extends AppCompatActivity {
     private String docId;
     private String subjectName;
     int startIndex = 165;
-
     String pdfName;
     String url;
     private EditText edTvIndexValue;
     private SwitchCompat switchIsNegative;
     private Button btnUpdatePdfNames;
+    private Button btnUpdateDocIds;
     private boolean isNegative = false;
     int indexValue;
 
@@ -46,6 +46,7 @@ public class UpdateDocs extends AppCompatActivity {
         edTvIndexValue = findViewById(R.id.index_value);
         switchIsNegative = findViewById(R.id.isNegative);
         btnUpdatePdfNames = findViewById(R.id.btn_update_pdf_name);
+        btnUpdateDocIds = findViewById(R.id.btn_doc_update_ids);
 
         edTvIndexValue.setText("0");
 
@@ -59,6 +60,44 @@ public class UpdateDocs extends AppCompatActivity {
 
             updatePdfNames(lang, type, className, indexValue);
         });
+
+
+        btnUpdateDocIds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateDocIds(lang, type, className, docId);
+
+            }
+        });
+    }
+    private void updateDocIds(String lang, String type, String className, String docId){
+        FirebaseFirestore.getInstance().collection(lang).document(type)
+                .collection("classes")
+                .document(className)
+                .collection("subjects")
+                .document(docId)
+                .collection("chapters").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
+                            FirebaseFirestore.getInstance().collection(lang)
+                                    .document(type)
+                                    .collection("classes")
+                                    .document(className)
+                                    .collection("subjects")
+                                    .document(docId)
+                                    .collection("chapters").document(queryDocumentSnapshots.getDocuments().get(i).getId())
+                                    .update("id", queryDocumentSnapshots.getDocuments().get(i).getId())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
 
     }
 

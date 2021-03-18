@@ -34,4 +34,17 @@
         android:layout_marginStart="12dp"
         />
 
+    <Button
+        android:id="@+id/btn_doc_update_ids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Update Doc IDs"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_update_pdf_name"
+        />
+
+
+
+
 </RelativeLayout>
