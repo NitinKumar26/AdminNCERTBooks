@@ -95,9 +95,6 @@ public class SubjectActivity extends AppCompatActivity {
                     chapterAdapter.setItems(chapters);
                     chapterAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
-                    for (int i = 0; i < subjectsList.size(); i++){
-                        Log.e("urlsize--> index: ",  i  + " " + subjectsList.get(i).getChapter_pdf_url().length());
-                    }
                 }).addOnFailureListener(e -> {})
                 .addOnCompleteListener(task -> {});
     }

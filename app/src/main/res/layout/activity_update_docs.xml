@@ -44,7 +44,14 @@
         android:layout_below="@id/btn_update_pdf_name"
         />
 
-
-
+    <Button
+        android:id="@+id/btn_add_subjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Add Subjects in storage"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_doc_update_ids"
+        />
 
 </RelativeLayout>
