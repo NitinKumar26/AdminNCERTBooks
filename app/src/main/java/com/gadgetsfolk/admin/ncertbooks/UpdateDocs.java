@@ -82,20 +82,9 @@ public class UpdateDocs extends AppCompatActivity {
         });
 
 
-        btnUpdateDocIds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDocIds(lang, type, className, docId);
+        btnUpdateDocIds.setOnClickListener(v -> updateDocIds(lang, type, className, docId));
 
-            }
-        });
-
-        btnAddSubjectsInStorage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addSubjectsInStorage(lang, type, className, docId);
-            }
-        });
+        btnAddSubjectsInStorage.setOnClickListener(v -> addSubjectsInStorage(lang, type, className, docId));
     }
 
     @Override
@@ -135,7 +124,6 @@ public class UpdateDocs extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
     private void updatePdfNames(String lang, String type, String className, int index){
@@ -150,7 +138,10 @@ public class UpdateDocs extends AppCompatActivity {
                     for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
                         url = queryDocumentSnapshots.getDocuments().get(i).getString("chapter_pdf_url");
                         if (url != null) {
-                            pdfName = url.substring(startIndex, startIndex + 24);
+                            Log.e("urlLength " + i, String.valueOf(url.length()));
+                            pdfName = url.split("\\?", 24)[0];
+                            pdfName = pdfName.substring(pdfName.length() - 24);
+                            //pdfName = url.substring(startIndex, startIndex + 24);
                             FirebaseFirestore.getInstance()
                                     .collection(lang)
                                     .document(type)
