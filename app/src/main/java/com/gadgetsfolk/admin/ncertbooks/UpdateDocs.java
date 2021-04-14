@@ -34,7 +34,6 @@ public class UpdateDocs extends AppCompatActivity {
     private String className;
     private String docId;
     private String subjectName;
-    int startIndex = 165;
     String pdfName;
     String url;
     private EditText edTvIndexValue;
@@ -42,8 +41,6 @@ public class UpdateDocs extends AppCompatActivity {
     private Button btnUpdatePdfNames;
     private Button btnUpdateDocIds;
     private Button btnAddSubjectsInStorage;
-    private boolean isNegative = false;
-    int indexValue;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -70,15 +67,8 @@ public class UpdateDocs extends AppCompatActivity {
 
         edTvIndexValue.setText("0");
 
-        switchIsNegative.setOnCheckedChangeListener((buttonView, isChecked) -> isNegative = !isNegative);
-
         btnUpdatePdfNames.setOnClickListener(v -> {
-            indexValue = Integer.parseInt(edTvIndexValue.getText().toString().trim());
-            if (indexValue > 0 && isNegative) indexValue = -indexValue;
-            Log.e("indexValue", String.valueOf(indexValue));
-            Log.e("isNegative", String.valueOf(isNegative));
-
-            updatePdfNames(lang, type, className, indexValue);
+            updatePdfNames(lang, type, className);
         });
 
 
@@ -98,59 +88,50 @@ public class UpdateDocs extends AppCompatActivity {
 
     private void updateDocIds(String lang, String type, String className, String docId){
         FirebaseFirestore.getInstance().collection(lang).document(type)
-                .collection("classes")
+                .collection(getString(R.string.collection_classes))
                 .document(className)
-                .collection("subjects")
+                .collection(getString(R.string.collection_subjects))
                 .document(docId)
-                .collection("chapters").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
-                            FirebaseFirestore.getInstance().collection(lang)
-                                    .document(type)
-                                    .collection("classes")
-                                    .document(className)
-                                    .collection("subjects")
-                                    .document(docId)
-                                    .collection("chapters").document(queryDocumentSnapshots.getDocuments().get(i).getId())
-                                    .update("id", queryDocumentSnapshots.getDocuments().get(i).getId())
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
+                .collection(getString(R.string.collection_chapters)).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
+                        FirebaseFirestore.getInstance().collection(lang)
+                                .document(type)
+                                .collection(getString(R.string.collection_classes))
+                                .document(className)
+                                .collection(getString(R.string.collection_subjects))
+                                .document(docId)
+                                .collection(getString(R.string.collection_chapters))
+                                .document(queryDocumentSnapshots.getDocuments().get(i).getId())
+                                .update(getString(R.string.id), queryDocumentSnapshots.getDocuments().get(i).getId())
+                                .addOnSuccessListener(unused -> Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show());
                     }
                 });
     }
 
-    private void updatePdfNames(String lang, String type, String className, int index){
-        startIndex = startIndex + index;
+    private void updatePdfNames(String lang, String type, String className){
         FirebaseFirestore.getInstance().collection(lang).document(type)
-                .collection("classes")
+                .collection(getString(R.string.collection_classes))
                 .document(className)
-                .collection("subjects")
+                .collection(getString(R.string.collection_subjects))
                 .document(docId)
-                .collection("chapters").get()
+                .collection(getString(R.string.collection_chapters)).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
-                        url = queryDocumentSnapshots.getDocuments().get(i).getString("chapter_pdf_url");
+                        url = queryDocumentSnapshots.getDocuments().get(i).getString(getString(R.string.chapter_pdf_url));
                         if (url != null) {
                             Log.e("urlLength " + i, String.valueOf(url.length()));
-                            pdfName = url.split("\\?", 24)[0];
+                            pdfName = url.split("\\?")[0];
                             pdfName = pdfName.substring(pdfName.length() - 24);
-                            //pdfName = url.substring(startIndex, startIndex + 24);
                             FirebaseFirestore.getInstance()
                                     .collection(lang)
                                     .document(type)
-                                    .collection("classes")
+                                    .collection(getString(R.string.collection_classes))
                                     .document(className)
-                                    .collection("subjects")
+                                    .collection(getString(R.string.collection_subjects))
                                     .document(docId)
-                                    .collection("chapters").document(queryDocumentSnapshots.getDocuments().get(i).getId())
-                                    .update("pdf_name", pdfName).addOnSuccessListener(unused ->
+                                    .collection(getString(R.string.collection_chapters)).document(queryDocumentSnapshots.getDocuments().get(i).getId())
+                                    .update(getString(R.string.pdf_name), pdfName).addOnSuccessListener(unused ->
                                     Toast.makeText(UpdateDocs.this, "Oh Yeah!", Toast.LENGTH_SHORT).show());
                         }
                     }
@@ -160,29 +141,18 @@ public class UpdateDocs extends AppCompatActivity {
 
     private void addSubjectsInStorage(String lang, String type, String className, String docId){
         FirebaseFirestore.getInstance().collection(lang).document(type)
-                .collection("classes")
+                .collection(getString(R.string.collection_classes))
                 .document(className)
-                .collection("subjects").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                Uri file = Uri.fromFile(new File("/storage/emulated/0/InstaSave/InstaDownload/comPopularAppInstaget.txt"));
-                for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
-                    StorageReference txtFileRef = FirebaseStorage.getInstance().getReference().child(lang + "/" + type + "/" +
-                            className.toLowerCase() + "/" + queryDocumentSnapshots.getDocuments().get(i).getString("subject") + "/" + file.getLastPathSegment());
-                    //Register observers to listen for when the upload is done or if it fails
-                    UploadTask uploadTask = txtFileRef.putFile(file);
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(UpdateDocs.this, "Yeah!! -- Storage", Toast.LENGTH_SHORT).show(); }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull @NotNull Exception e) {
-                            Log.e("failure", e.getMessage()); }
-                    });
-                }
-            }
-        });
+                .collection(getString(R.string.collection_subjects)).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Uri file = Uri.fromFile(new File("/storage/emulated/0/InstaSave/InstaDownload/comPopularAppInstaget.txt"));
+                    for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++){
+                        StorageReference txtFileRef = FirebaseStorage.getInstance().getReference().child(lang + "/" + type + "/" +
+                                className.toLowerCase() + "/" + queryDocumentSnapshots.getDocuments().get(i).getString("subject") + "/" + file.getLastPathSegment());
+                        //Register observers to listen for when the upload is done or if it fails
+                        UploadTask uploadTask = txtFileRef.putFile(file);
+                        uploadTask.addOnSuccessListener(taskSnapshot -> Toast.makeText(UpdateDocs.this, "Yeah!! -- Storage", Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Log.e("failure", e.getMessage()));
+                    }
+                });
     }
 }
